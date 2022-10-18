@@ -1,10 +1,12 @@
 import Posts from "./components/Posts";
-import PaginationRounded  from "./components/PaginationRounded";
+import Search  from "./components/Search";
 
 function App() {
   return (
     <div className="App">
+
       <Posts />
+      
       
     </div>
   );

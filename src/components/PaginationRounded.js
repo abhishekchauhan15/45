@@ -1,20 +1,27 @@
 import * as React from "react";
 import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
+import { AppBar, Toolbar, Box, Typography, styled } from "@mui/material";
 
-export default function PaginationRounded({ postsPerPage, totalPosts , paginate}) {
-  const pageNaumbers = [];
+export default function PaginationRounded({ paginate }) {
+  const [page, setPage] = React.useState(1);
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
 
-  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
-    pageNaumbers.push(i);
-  }
+  const PageBar = styled(Pagination)`
+  
+    margin-top: 20px;
+  `;
+
   return (
     <div>
-      {pageNaumbers.map((number, index) => {
-        return <button key ={index} onClick= {() => paginate(number)}> { number}</button>
-      
-      })}
-      {/* <Pagination count={10} variant="outlined" shape="rounded" /> */}
+      <Pagination
+        color="primary"
+        count={7}
+        defaultPage={1}
+        onChange={handleChange}
+        onClick={() => paginate(page)}
+      />
     </div>
   );
 }

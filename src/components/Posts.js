@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
 import BasicCard from "./BasicCard";
 import PaginationRounded from "./PaginationRounded";
-import Search from "./Search";
+import SearchAppBar from "./SearchAppBar";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(10);
+  const [postsPerPage] = useState(5);
   const [searchTerm, setSearchTerm] = useState("");
 
   // it runs when the component mounts or whenever it updates
   useEffect(() => {
     const fetchPosts = async () => {
       setLoading(true);
-      const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+      const res = await fetch("https://dummyjson.com/products");
       const data = await res.json();
-      setPosts(data);
+      setPosts(data.products);
       setLoading(false);
     };
     fetchPosts();
@@ -30,7 +30,7 @@ const Posts = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   // console.log(searchTerm);
 
-  const keys = ["title", "body"];
+  const keys = ["title", "description"];
 
   const filteredData = () => {
     if (searchTerm === "") {
@@ -45,7 +45,7 @@ const Posts = () => {
 
   return (
     <div>
-      <Search setSearchTerm={setSearchTerm} />
+      <SearchAppBar setSearchTerm={setSearchTerm} />
       <BasicCard posts={filteredData()} loading={loading} />
       <PaginationRounded
         postsPerPage={postsPerPage}
